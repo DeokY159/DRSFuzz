@@ -7,37 +7,43 @@
 ```python
 Oogway/
 │
-├── Oogway.py                       # Fuzzer 동작 (CLI 인터페이스 및 전체 흐름 제어)
+├── Oogway.py                       # 전체 퍼징 프로세스 제어 CLI (실행 엔트리포인트)
 │
-├── fuzzer/                       # 🔧 퍼징을 위한 유틸리티 및 실행 스크립트
-│   ├── logger.py                 # 로그 출력 유틸리티 (컬러 지원 포함)
-│   ├── gen.py                    # GPT 기반 하네스 생성기 (HarnessGenerator 클래스)
-│   ├── fuzz.py                   # Docker 기반 퍼징 수행 스크립트
-│   ├── baseprompt.txt            # 하네스 생성을 위한 기본 프롬프트
-│   └── seedprompt.txt            # 하네스 생성을 위한 시드 프롬프트
+├── input_gen/                      # 🎲 입력 생성기 모듈 (RTPS + ROS 입력 생성)
+│   ├── mutator.py                  # 타입 기반 변이, topic-aware, QoS-aware 등
+│   ├── spec_parser.py              # ROS msg, srv, config spec 파싱
+│   └── template/                   # 메시지/패킷 템플릿
 │
-├── target_projects/              # 🎯 퍼징 대상 ROS2 프로젝트 소스코드
-│   ├── turtlebot3/               # 예: turtlebot3 전체 프로젝트 소스
-│   └── <other_project>/          # 추가 대상 프로젝트
+├── executor/                       # ⚙️ 병렬 실행기 (타겟 DDS 실행 + 로그 수집)
+│   ├── runner_fastdds.py           # Fast DDS 실행 컨테이너 제어
+│   ├── runner_cyclone.py           # Cyclone DDS 실행 컨테이너 제어
+│   ├── hook_tracker.py             # 콜백/리스너 실행 추적 모듈
+│   ├── oracle_monitor.py           # odom, goal, twist 등 상태 추적
+│   └── sanitizer_log.py            # ASAN/UBSAN 로그 수집기
 │
-├── build/                        # 🏗️ 하네스 생성 및 빌드 디렉토리
-│   ├── turtlebot3/               # 하네스 생성 후 이곳에 복사하여 colcon 빌드
-│   │   ├── src/ros2_fuzz/src/
-│   │   │   ├── fuzz_xyz.cpp      # 하네스 C++ 파일
-│   │   │   └── ...
-│   │   └── ...                   # CMakeLists.txt 등
-│   └── <other_project>/
+├── analyzer/                       # 🧠 차분 분석 및 의미 기반 취약점 판단
+│   ├── diff_analyzer.py            # DDS 실행 결과 비교 (시간, 순서, 로그 등)
+│   ├── oracle_handler.py           # RoboFuzz 기반 의미 오류 판단 로직
+│   └── report_generator.py         # 분석 결과 리포트 출력
 │
-├── results/                      # 📊 퍼징 실행 결과 저장소
-│   ├── turtlebot3/
-│   │   ├── fuzz_create_node/
-│   │   │   ├── logs/             # 퍼징 로그 파일
-│   │   │   └── crashes/          # 크래시 입력값 저장
-│   │   └── fuzz_create_publisher/
-│   │       ├── ...
-│   └── <other_project>/
+├── config/                         # ⚙️ 실행 환경 구성
+│   ├── fastdds_profile.xml         # DDS 설정 파일
+│   ├── cyclone_config.json         # Cyclone DDS 설정
+│   └── topic_spec.yaml             # 입력 생성 대상 정의
 │
-└── README.md                     # 설명서
+├── corpus/                         # 📦 시드 입력 및 피드백 기반 corpus 저장소
+│   ├── seeds/                      # 초깃값 입력
+│   └── mutated/                    # 변형된 입력값
+│
+├── results/                        # 📊 퍼징 및 분석 결과
+│   ├── run_2024_04_03_01/          # 실행 단위별 결과 디렉토리
+│   │   ├── logs/
+│   │   ├── crashes/
+│   │   ├── sanitizer/
+│   │   └── summary.json
+│   └── ...
+│
+└── README.md                       # 프로젝트 설명서 (설치, 실행 방법, 구성 설명)
 ```
 
 
