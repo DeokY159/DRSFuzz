@@ -1,16 +1,13 @@
-# Oogway
-ROS2 + DDS Fuzzer
-
 # Oogway 🐢
 
-**Oogway** is an automated fuzzing framework for ROS2-based C++ projects. It leverages AI (OpenAI GPT models) to generate LibFuzzer-compatible fuzz harnesses and continuously fuzzes target code using coverage-guided techniques in a Dockerized environment.
+**Oogway** is a differential and semantic-aware fuzzing framework for ROS 2-based systems that leverages both DDS-level and ROS-level execution analysis. It generates RTPS and ROS configuration inputs based on topic, QoS, and type specifications, and executes them across multiple DDS implementations (e.g., Fast DDS, Cyclone DDS) in parallel. Using sanitizer-based trace collection and Oracle-based behavior monitoring, Oogway detects semantic bugs, execution inconsistencies.
 
 
 ## 📁 Project Structure
 ```python
-AutoROS2Fuzz/
+Oogway/
 │
-├── main.py                       # 진입점 (CLI 인터페이스 및 전체 흐름 제어)
+├── Oogway.py                       # Fuzzer 동작 (CLI 인터페이스 및 전체 흐름 제어)
 │
 ├── fuzzer/                       # 🔧 퍼징을 위한 유틸리티 및 실행 스크립트
 │   ├── logger.py                 # 로그 출력 유틸리티 (컬러 지원 포함)
