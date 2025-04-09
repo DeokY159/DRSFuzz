@@ -1,6 +1,6 @@
-# 🐢 Oogway
+# 🐢 DRSFuzz
 
-**Oogway** is a differential and semantic-aware fuzzing framework for ROS 2-based systems that leverages both DDS-level and ROS-level execution analysis. It generates RTPS and ROS configuration inputs based on topic, QoS, and type specifications, and executes them across multiple DDS implementations (e.g., Fast DDS, Cyclone DDS) in parallel. Using sanitizer-based trace collection and Oracle-based behavior monitoring, Oogway detects semantic bugs, execution inconsistencies.
+**DRSFuzz** is a differential and semantic-aware fuzzing framework for ROS 2-based systems that leverages both DDS-level and ROS-level execution analysis. It generates RTPS and ROS configuration inputs based on topic, QoS, and type specifications, and executes them across multiple DDS implementations (e.g., Fast DDS, Cyclone DDS) in parallel. Using sanitizer-based trace collection and Oracle-based behavior monitoring, Oogway detects semantic bugs, execution inconsistencies.
 
 
 ## 📁 Project Structure
