@@ -5,9 +5,9 @@
 
 ## 📁 Project Structure
 ```python
-Oogway/
+DRSFuzz/
 │
-├── Oogway.py                       # 전체 퍼징 프로세스 제어 CLI (실행 엔트리포인트)
+├── Fuzzer.py                       # 전체 퍼징 프로세스 제어 CLI (실행 엔트리포인트)
 │
 ├── input_gen/                      # 🎲 입력 생성기 모듈 (RTPS + ROS 입력 생성)
 │   ├── mutator.py                  # 타입 기반 변이, topic-aware, QoS-aware 등
